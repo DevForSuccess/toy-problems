@@ -18,8 +18,24 @@
 *
 */
 
-var rockPaperScissors = function (
-) {
-  // TODO: your solution here
+var rockPaperScissors = function (rounds, games = 5) {
+  let result = [];
+  let roundResult = '';
+  let options = ['R', 'S', 'P'];
+  for (let game = 1; game <= games; game++) {
+    roundResult = '';
+    for (let round = 1; round <= rounds; round++) {
+      roundResult += (options[Math.floor(Math.random() * options.length)]);
+    }
+    result.push(roundResult);
+  }
+  return result;
 };
 
+var games = 7;
+var rounds = 5;
+var result = rockPaperScissors(rounds);
+console.log(result);
+
+result = rockPaperScissors(rounds, games);
+console.log(result);
