@@ -18,7 +18,7 @@
 *
 */
 
-var rockPaperScissors = function (rounds, games = 5) {
+var rockPaperScissors = function (rounds, games = 27) {
   let result = [];
   let roundResult = '';
   let options = ['R', 'S', 'P'];
