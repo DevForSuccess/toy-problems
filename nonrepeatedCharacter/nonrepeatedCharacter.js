@@ -6,6 +6,19 @@
  *   firstNonRepeatedCharacter('AACBDB'); // => 'C'
  */
 
-var firstNonRepeatedCharacter = function(string) {
-  // TODO: your solution here
+var firstNonRepeatedCharacter = function (string) {
+  var strArr = string.split('').sort();
+
+  for (var i = 0; i < strArr.length; i++) {
+    if (strArr.indexOf(strArr[i], i + 1) === -1) {
+      return strArr[i];
+    }
+    while (strArr[i] === strArr[i + 1]) {
+      strArr.splice(i + 1, 1);
+    }
+  }
+  return 'no unique character found';
 };
+
+console.log(firstNonRepeatedCharacter('ABA')); // => 'B'
+console.log(firstNonRepeatedCharacter('AACBDB')); // => 'C'
