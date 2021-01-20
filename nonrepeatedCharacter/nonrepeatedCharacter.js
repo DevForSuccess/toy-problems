@@ -17,7 +17,6 @@ var firstNonRepeatedCharacter = function (string) {
       strArr.splice(i + 1, 1);
     }
   }
-  return 'no unique character found';
 };
 
 console.log(firstNonRepeatedCharacter('ABA')); // => 'B'
