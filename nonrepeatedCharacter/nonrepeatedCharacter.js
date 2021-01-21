@@ -14,10 +14,14 @@ var firstNonRepeatedCharacter = function (string) {
       return strArr[i];
     }
     while (strArr[i] === strArr[i + 1]) {
-      strArr.splice(i + 1, 1);
+      i++;
     }
   }
 };
 
 console.log(firstNonRepeatedCharacter('ABA')); // => 'B'
 console.log(firstNonRepeatedCharacter('AACBDB')); // => 'C'
+console.log(firstNonRepeatedCharacter('AABCAC')); // => 'B'
+console.log(firstNonRepeatedCharacter('ABCA')); // => 'B'
+console.log(firstNonRepeatedCharacter('AAAACX')); // => 'C'
+console.log(firstNonRepeatedCharacter('AABCABD')); // => 'C'
