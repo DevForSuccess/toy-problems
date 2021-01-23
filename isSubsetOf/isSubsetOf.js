@@ -35,8 +35,11 @@ Array.prototype.isSubsetOf = function (arr) {
         return false;
       }
     } else if (typeof arg === 'object') {
-      for (let key in Object.keys(arg)) {
-
+      let stringifyStr = JSON.stringify(arg);
+      let stringifyInput = JSON.stringify(arr);
+      let result = stringifyInput.indexOf(stringifyStr);
+      if (result === false) {
+        return false;
       }
     } else {
       if (arr.indexOf(arg) === -1) {
@@ -65,4 +68,4 @@ console.log('result of c (array in elements): ', result);
 let d = ['car', 'house', ['coffee', 'hot chocolate'], { key1: 'value1', key2: 'value2' }];
 d.prototype = Array.prototype;
 result = d.isSubsetOf(['reset', 'merge', 'add', 'commit', 'car', 'house', ['coffee', 'hot chocolate'], { key1: 'value1', key2: 'value2' }]) // true
-console.log('result of d: ', result);git
+console.log('result of d: ', result);
