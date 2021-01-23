@@ -29,12 +29,21 @@ console.log('E', 'make the method work for arrays that contain objects or arrays
 Array.prototype.isSubsetOf = function (arr) {
   for (let i = 0; i < this.length; i++) {
     let arg = this[i];
-    if (arr.indexOf(arg) === -1) {
-      return false;
+    if (Array.isArray(arg)) {
+      let result = Array.prototype.isSubsetOf(arg);
+      if (result === false) {
+        return false;
+      }
+    } else if (typeof arg === 'object') {
+      for (let key in Object.keys(arg)) {
+
+      }
+    } else {
+      if (arr.indexOf(arg) === -1) {
+        return false;
+      }
     }
-    // }
   }
-  let why = 'here';
   return true;
 };
 
@@ -51,4 +60,9 @@ console.log('result of b: ', result);
 let c = ['car', 'house', ['coffee', 'hot chocolate']];
 c.prototype = Array.prototype;
 result = c.isSubsetOf(['reset', 'merge', 'add', 'commit', 'car', 'house', ['coffee', 'hot chocolate']]) // true
-console.log('result of c: ', result);
+console.log('result of c (array in elements): ', result);
+
+let d = ['car', 'house', ['coffee', 'hot chocolate'], { key1: 'value1', key2: 'value2' }];
+d.prototype = Array.prototype;
+result = d.isSubsetOf(['reset', 'merge', 'add', 'commit', 'car', 'house', ['coffee', 'hot chocolate'], { key1: 'value1', key2: 'value2' }]) // true
+console.log('result of d: ', result);git
