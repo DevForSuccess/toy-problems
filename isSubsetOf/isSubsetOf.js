@@ -50,22 +50,53 @@ Array.prototype.isSubsetOf = function (arr) {
   return true;
 };
 
-let a = ['commit', 'push'];
-a.prototype = Array.prototype;
-let result = a.isSubsetOf(['commit', 'rebase', 'push', 'blame']); // true
-console.log('result of a: ', result);
+let contextArr = [];
+let inputArr = [];
+let result = 'true/false';
+let test = 'isSubsetOf';
+contextArr.prototype = Array.prototype;
 
-let b = ['merge', 'reset', 'reset'];
-b.prototype = Array.prototype;
-result = b.isSubsetOf(['reset', 'merge', 'add', 'commit']) // true
-console.log('result of b: ', result);
+contextArr = ['commit', 'push'];
+inputArr = ['commit', 'rebase', 'push', 'blame'];
+result = contextArr.isSubsetOf(inputArr); // true
+console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
 
-let c = ['car', 'house', ['coffee', 'hot chocolate']];
-c.prototype = Array.prototype;
-result = c.isSubsetOf(['reset', 'merge', 'add', 'commit', 'car', 'house', ['coffee', 'hot chocolate']]) // true
-console.log('result of c (array in elements): ', result);
+contextArr = ['merge', 'reset', 'reset'];
+inputArr = ['reset', 'merge', 'add', 'commit'];
+result = contextArr.isSubsetOf(inputArr); // true
+console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
 
-let d = ['car', 'house', ['coffee', 'hot chocolate'], { key1: 'value1', key2: 'value2' }];
-d.prototype = Array.prototype;
-result = d.isSubsetOf(['reset', 'merge', 'add', 'commit', 'car', 'house', ['coffee', 'hot chocolate'], { key1: 'value1', key2: 'value2' }]) // true
-console.log('result of d: ', result);
+contextArr = ['car', 'house', ['coffee', 'hot chocolate']];
+inputArr = ['reset', 'merge', 'add', 'commit', 'car', 'house', ['coffee', 'hot chocolate']];
+result = contextArr.isSubsetOf(inputArr); // true
+console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
+
+contextArr = [{ key1: 'value1', key2: 'value2' }];
+inputArr = ['car', 'house', ['coffee', 'hot chocolate'], { key1: 'value1', key2: 'value2' }];
+result = contextArr.isSubsetOf(inputArr); // true
+console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
+
+contextArr = ['cat', 'dog', 'cow'];
+inputArr = ['dog', 'cow', 'fox'];
+result = contextArr.isSubsetOf(inputArr); // false
+console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
+
+contextArr =  ['cat', 'cat', 'dog'];
+inputArr = ['cat', 'dog'];
+result = contextArr.isSubsetOf(inputArr); // true
+console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
+
+contextArr =  ['cat', 'cat', 'dog'];
+inputArr = ['cat'];
+result = contextArr.isSubsetOf(inputArr); // true
+console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
+
+contextArr =  [1, 'cat', 3];
+inputArr = [4, 3, 'cat', 1];
+result = contextArr.isSubsetOf(inputArr); // true
+console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
+
+contextArr =  [1, 'cat', 3];
+inputArr = [4, 'cat', 1];
+result = contextArr.isSubsetOf(inputArr); // false
+console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
