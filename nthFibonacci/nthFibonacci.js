@@ -27,15 +27,15 @@
 
 // recursive
 var nthFibonacci = function (n) {
-  if (n <= 0) {
+  /* if (n <= 0) {
     return;
   }
   if (n === 1) {
     return 0;
-  }
+  } */
 
   let mthFibonacci = function (m) {
-    if (m === 0) {
+    if (m <= 0) {
       return 0;
     }
     if (m === 1) {
@@ -47,8 +47,8 @@ var nthFibonacci = function (n) {
 };
 
 console.log('Recursive solution');
-console.log(nthFibonacci(0)); // => undefined
-console.log(nthFibonacci(1)); // => 0
+console.log(nthFibonacci(0)); // => 0
+console.log(nthFibonacci(1)); // => 1
 console.log(nthFibonacci(2)); // => 1
 console.log(nthFibonacci(3)); // => 2
 console.log(nthFibonacci(4)); // => 3
@@ -58,10 +58,10 @@ console.log(nthFibonacci(6)); // => 8
 console.log('\n Iterative solution');
 nthFibonacci = function (n) {
   if (n <= 0) {
-    return;
+    return 0;
   }
   if (n === 1) {
-    return 0;
+    return 1;
   }
 
   // start with number greater than or equals to 2
@@ -76,8 +76,8 @@ nthFibonacci = function (n) {
   return a + b;
 };
 
-console.log(nthFibonacci(0)); // => undefined
-console.log(nthFibonacci(1)); // => 0
+console.log(nthFibonacci(0)); // => 0
+console.log(nthFibonacci(1)); // => 1
 console.log(nthFibonacci(2)); // => 1
 console.log(nthFibonacci(3)); // => 2
 console.log(nthFibonacci(4)); // => 3
