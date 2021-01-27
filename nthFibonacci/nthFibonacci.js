@@ -21,7 +21,7 @@
  */
 
 // I: any number greater than 0
-// O: repeating the process of adding numbers of current number with the previous number
+// O: sum of the last two numbers after process iteration of input number
 // C: n/a
 // E: number is less than or equal to 1
 
