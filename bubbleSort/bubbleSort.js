@@ -31,8 +31,29 @@
 */
 
 // Feel free to add helper functions if needed.
+// Time complexity: O(n)2 since it needs to iterate the rest of the elements
+// for each element in the array.
 
+var bubbleSort = function (array) {
+  let testArray = array.slice();
+  var isAnySwap = false;
 
-var bubbleSort = function(array) {
-  // Your code here.
+  for (let i = 0; i < testArray.length; i++) {
+    for (let j = 0; j < testArray.length - 1; j++) {
+      if (testArray[j] > testArray[j + 1]) {
+        let temp = testArray[j];
+        testArray[j] = testArray[j + 1];
+        testArray[j + 1] = temp;
+        isAnySwap = true;
+      }
+    }
+    if (!isAnySwap) {
+      // done with sorting at first iteration, in this case, the time complexity is O(n)
+      break;
+    }
+  }
+  return testArray;
 };
+
+var test = [2, 1, 3];
+console.log(bubbleSort(test));
