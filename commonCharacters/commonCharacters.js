@@ -10,8 +10,28 @@
  * Extra credit: Extend your function to handle more than two input strings.
  */
 
-
-
-var commonCharacters = function(string1, string2) {
-  // TODO: Your code here!
+/* var commonCharacters = function (string1, string2) {
+  let common = string1.split('').filter(l => {
+    if (string2.includes(l)) {
+      return l;
+    }
+  });
+  return common.join('');
 };
+
+console.log(commonCharacters('acexivou', 'aegihobu')); */
+
+let reducer = (acc, val) => {
+  let common = acc.split('').sort().filter((l, idx) => {
+    if (val.includes(l) && (l != acc[idx + 1])) {
+      return l;
+    }
+  });
+  return common.join('');
+}
+
+var commonCharacters = function () {
+  let commons = [...arguments].reduce(reducer);
+  return commons;
+}
+console.log(commonCharacters('aocexaivou', 'aegiohoaebu', 'ballplayer', 'aeiou'));
