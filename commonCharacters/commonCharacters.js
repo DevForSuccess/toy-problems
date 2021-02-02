@@ -22,8 +22,8 @@
 console.log(commonCharacters('acexivou', 'aegihobu')); */
 
 let reducer = (acc, val) => {
-  let common = acc.split('').sort().filter((l, idx) => {
-    if (val.includes(l) && (l != acc[idx + 1])) {
+  let common = acc.split('').filter((l, idx) => {
+    if (val.includes(l) && !acc.slice(0, idx).includes(l)) {
       return l;
     }
   });
@@ -34,4 +34,6 @@ var commonCharacters = function () {
   let commons = [...arguments].reduce(reducer);
   return commons;
 }
-console.log(commonCharacters('aocexaivou', 'aegiohoaebu', 'ballplayer', 'aeiou'));
+console.log(commonCharacters('aocexaievou', 'aegiohoaebu', 'ballplayer', 'aeiou'));
+var result = commonCharacters('zyx', 'xzy');
+console.log(result);
