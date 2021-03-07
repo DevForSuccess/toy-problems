@@ -18,8 +18,7 @@
  */
 
 var powerSet = function (str) {
-    let result = str.split('').sort().reduce((acc, val) => acc.concat(acc.map(el=>[...el, val])),[[]]).map(el=>el.join(''));
-    return result;
+    return str.split('').sort().reduce((acc, val) => acc.concat(acc.map(el=>[...el, val])),[[]]).map(el=>el.join(''));
 }
 
 let result = powerSet("abc")
