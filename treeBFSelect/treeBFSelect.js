@@ -124,3 +124,4 @@ result = root1.BFSelect(function (value, depth) {
     return depth === 1;
 });  // [2, 3]
 console.log(result);
+
