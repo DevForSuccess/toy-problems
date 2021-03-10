@@ -17,6 +17,4 @@
  * -> ["", "j", "ju", "jm", "jp", "jmu", "jmp", "jpu", "jmpu", "u", "m", "p", "mu", "mp", "pu", "mpu"]
  */
 
-var powerSet = function (str) {
-    return [...new Set([...str])].sort().reduce((acc, val) => acc.concat(acc.map(el => [...el, val])), [[]]).map(el => el.join(''));
-}
+var powerSet = (str) => [...new Set([...str])].sort().reduce((acc, val) => acc.concat(acc.map(el => [...el, val])), [[]]).map(el => el.join(''));
