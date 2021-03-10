@@ -40,13 +40,3 @@ var compose = function () {
 var pipe = function () {
   return (val) => [...arguments].reduce((acc, func) => func.call(null, acc), val);
 };
-
-var greet = function (name) { return 'hi: ' + name; }
-var exclaim = function (statement) { return statement.toUpperCase() + '!'; }
-var welcome = compose(greet, exclaim);
-console.log(welcome('phillip')); // 'hi: PHILLIP!'
-
-var add2 = function (number) { return number + 2; }
-var multiplyBy3 = function (number) { return number * 3; }
-console.log(pipe(add2, multiplyBy3)(5)); // 21
-console.log(pipe(add2, multiplyBy3, multiplyBy3)(5)); // 63
