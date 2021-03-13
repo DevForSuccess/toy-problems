@@ -16,11 +16,21 @@
  */
 
 var rotatedArraySearch = function (rotated, target) {
-  for (let i=0; i<rotated.length; i++) {
-    if (rotated[i] === target) {
-      return i;
+  let start = 0;
+  let end = rotated.length - 1;
+
+  while (start <= end) {
+    let mid = ((start + end) / 2) | 0;
+    if (rotated[mid] === target) {
+      return mid;
+    }
+    if (rotated[mid] < target) {
+      start = mid + 1;
+    } else {
+      end = mid - 1;
     }
   }
+
   return null;
 };
 
