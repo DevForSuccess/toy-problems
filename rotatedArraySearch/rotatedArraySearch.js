@@ -9,13 +9,23 @@
  *
  * For instance:
  * rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 2) === 5
- *
+  *
  * rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 100) === null
  *
  * Target time complexity: O(log(array.length))
  */
 
 var rotatedArraySearch = function (rotated, target) {
-  // Your code here:
+  for (let i=0; i<rotated.length; i++) {
+    if (rotated[i] === target) {
+      return i;
+    }
+  }
+  return null;
 };
 
+let result = rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 2);
+console.log(result);
+
+result = rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 100);
+console.log(result);
