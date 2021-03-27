@@ -39,17 +39,47 @@
  */
 
 
-var Range = function(start, end, step) {
+var Range = function (start, end, step) {
+    this.start = start;
+    this.end = isNaN(end) ? start : end;
+    this.step = !step ? (end > start ? 1 : -1) : step;
 };
 
 Range.prototype.size = function () {
+    if (!this.start) {
+        return null;
+    }
+    return (((this.end - this.start) / this.step) | 0) + 1;
 };
 
 Range.prototype.each = function (callback) {
+    if (!this.start) {
+        return null;
+    }
+    for (let i = 0; i < this.size(); i++) {
+        callback(this.start + this.step * i);
+    }
 };
 
 Range.prototype.includes = function (val) {
+    if (!this.start) {
+        return null;
+    }
+    let included = false;
+    this.each(el => {
+        if (el === val) {
+            included = true;
+        }
+    });
+    return included;
 };
 
-var range = new Range(1);
+let evenNumbers = new Range(2, 8, 2);
+console.log(evenNumbers.size());
 
+evenNumbers.each(function (val) {
+    console.log(val + "!");
+});
+
+console.log(evenNumbers.includes(2));
+console.log(evenNumbers.includes(5));
