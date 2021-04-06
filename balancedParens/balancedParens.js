@@ -24,6 +24,9 @@
  *
  */
 var balancedParens = function (input) {
+    if (input.length === 0) {
+        return true;
+    }
     const brackets = { '[': 1, '{': 2, '(': 3, ']': -1, '}': -2, ')': -3 };
     let brackets_storage = [];
 

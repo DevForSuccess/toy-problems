@@ -14,18 +14,43 @@
  */
 
 var longestRun = function (string) {
-  // TODO: Your code here!
+    let result = {};
+    key = () => Object.keys(result)[0];
+    let longest = 0, current = 0, prevIdx = 0;
+    let char = '';
+
+    for (let i = 0; i < string.length - 1; i++) {
+        if (!char) {
+            char = string[i];
+        }
+        if (string[i] === char) {
+            current++;
+        } else {
+            if (current > longest) {
+                result = {};
+                result[char] = [prevIdx, i-1];
+                longest = current;
+            }
+            char = string[i];
+            current = 1;
+            prevIdx = i;
+        }
+    };
+    return result[key()];
 };
 
 // If you need a random string generator, use this!
 // (you wont need this function for your solution but it may help with testing)
 var randomString = function (len) {
-  var text = '';
-  var possible = 'abcdefghijklmnopqrstuvwxyz';
+    var text = '';
+    var possible = 'abcdefghijklmnopqrstuvwxyz';
 
-  for (var i = 0; i < len; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
+    for (var i = 0; i < len; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
 
-  return text;
+    return text;
 };
+
+let result = longestRun(randomString(15));
+console.log(result);
