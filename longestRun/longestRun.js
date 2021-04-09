@@ -28,7 +28,7 @@ var longestRun = function (string) {
         } else {
             if (current > longest) {
                 result = {};
-                result[char] = [prevIdx, i-1];
+                result[char] = [prevIdx, i - 1];
                 longest = current;
             }
             char = string[i];
@@ -36,7 +36,7 @@ var longestRun = function (string) {
             prevIdx = i;
         }
     };
-    return result[key()];
+    return result[key()] || null;
 };
 
 // If you need a random string generator, use this!
@@ -53,4 +53,16 @@ var randomString = function (len) {
 };
 
 let result = longestRun(randomString(15));
+console.log(result);
+
+result = longestRun("abbbcc") // [1, 3]
+console.log(result);
+
+result = longestRun("aabbc")  // [0, 1]
+console.log(result);
+
+result = longestRun("abcd")   // [0, 0]
+console.log(result);
+
+result = longestRun("")       // null
 console.log(result);
