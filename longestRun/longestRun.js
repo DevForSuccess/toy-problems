@@ -16,7 +16,7 @@
 var longestRun = function (string) {
     let result = {};
     key = () => Object.keys(result)[0];
-    let longest = 0, current = 0, prevIdx = 0;
+    let longest = 0, current = 0, start = 0;
     let char = '';
 
     for (let i = 0; i < string.length - 1; i++) {
@@ -28,12 +28,12 @@ var longestRun = function (string) {
         } else {
             if (current > longest) {
                 result = {};
-                result[char] = [prevIdx, i - 1];
+                result[char] = [start, i-1];
                 longest = current;
             }
             char = string[i];
             current = 1;
-            prevIdx = i;
+            start = i;
         }
     };
     return result[key()] || null;
