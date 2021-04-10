@@ -95,8 +95,34 @@
  *
  */
 
+var mergeSort = function (array) {
+    if (array.length <= 1) {
+        return array;
+    }
 
+    let middle = array.length / 2 | 0;
 
-var mergeSort = function(array) {
-  // Your code here.
+    let left = array.slice(0, middle);
+    let right = array.slice(middle);
+
+    return merge(mergeSort(left), mergeSort(right));
 };
+
+const merge = (left, right) => {
+    let result = [];
+    let leftIdx = 0, rightIdx = 0;
+
+    while (leftIdx < left.length && rightIdx < right.length) {
+        if (left[leftIdx] < right[rightIdx]) {
+            result.push(left[leftIdx]);
+            leftIdx++;
+        } else {
+            result.push(right[rightIdx]);
+            rightIdx++;
+        }
+    }
+    return result.concat(left.slice(leftIdx)).concat(right.slice(rightIdx));
+}
+
+let result = mergeSort([4, 7, 4, 3, 9, 1, 2]);
+console.log(result);
