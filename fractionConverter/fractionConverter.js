@@ -12,6 +12,37 @@
  *
  */
 
-var toFraction = function(number) {
-  // Your code here
+var toFraction = function (number) {
+    let multiplier = 0;
+    let denominator = 10; // 2, 5
+
+    const getMultiplier = (_num) => {
+        if (Number.isInteger(_num)) {
+            return;
+        } else {
+            multiplier++;
+            _num *= denominator ** multiplier;
+            getMultiplier(_num);
+        }
+    }
+    getMultiplier(number);
+
+    let numerator = number * (denominator ** multiplier);
+    denominator = denominator ** multiplier;
+
+    do {
+        if (Number.isInteger(numerator / 5) && Number.isInteger(denominator / 5)) {
+            numerator /= 5;
+            denominator /= 5;
+        }
+        if (Number.isInteger(numerator / 2) && Number.isInteger(denominator / 2)) {
+            numerator /= 2;
+            denominator /= 2;
+        }
+
+    } while ((Number.isInteger(numerator / 5) && Number.isInteger(denominator / 5)) || (Number.isInteger(numerator / 2) && Number.isInteger(denominator / 2)));
+
+    let result = '' + numerator + '/' + denominator;
+
+    return result;
 };
