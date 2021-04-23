@@ -43,7 +43,44 @@
  *  - Make your function accept a parameter for the direction of rotation (1 = clockwise, -1 = counterclockwise)
  */
 
-var rotateMatrix = function(matrix
-) {
-  // Your code here.
+var matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 'A', 'B', 'C'],
+    ['D', 'E', 'F', 'G']
+];
+console.log(matrix[0][0]); // 1
+console.log(matrix[3][2]); // 'F'
+
+var rotateMatrix = function (matrix) {
+    let repeat = max = matrix.length - 1;
+    let newMatrix = JSON.parse(JSON.stringify(matrix));
+    x = 0; y = 0;
+
+    while (repeat > 0) {
+        for (let i = 0; i <= max; i++) {
+            newMatrix[x + i][max] = matrix[x][y + i];
+            newMatrix[max - i][y] = matrix[max][max - i];
+            newMatrix[max][max - i] = matrix[x + i][max];
+            newMatrix[x][y + i] = matrix[max - i][y];
+        }
+
+        max -= 1;
+        repeat -= 2;
+        x++;
+        y++;
+    }
+    return newMatrix;
 };
+
+var rotatedMatrix = rotateMatrix(matrix); // Rotate 90 degrees clockwise
+console.log(rotatedMatrix[0][0]); // 'D'
+console.log(rotatedMatrix[3][2]); // 8
+
+matrix = [[1]];
+rotatedMatrix = rotateMatrix(matrix);
+console.log(rotatedMatrix);
+
+matrix = [[1, 2], [3, 4]];
+rotatedMatrix = rotateMatrix(matrix);
+console.log(rotatedMatrix);
