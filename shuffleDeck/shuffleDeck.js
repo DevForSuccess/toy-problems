@@ -31,22 +31,44 @@
  *   See https://www.dartmouth.edu/~chance/teaching_aids/books_articles/Mann.pdf .
  */
 
-var shuffleDeck = function(deck) {
-  // Your code here
+var shuffleDeck = function (deck) {
+    let end = deck.length - 1;
+    let start = 1;
+
+    while (start >= 0) {
+        while (start < end) {
+            let temp = deck[end];
+            deck[end] = deck[start];
+            deck[start] = temp;
+
+            start += 2;
+            end -= 2;
+        }
+
+        end = start - 2;
+        start = 0;
+    }
 };
 
 // Ordered deck generator provided for your testing convenience
 // (You may alter this function, but an unaltered copy will be used for tests.)
-var orderedDeck = function() {
-  var suits = [ '♥', '♣', '♠', '♦' ];
-  var values = [ 'A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K' ];
-  var deck = [];
+var orderedDeck = function () {
+    var suits = ['♥', '♣', '♠', '♦'];
+    var values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
+    var deck = [];
 
-  suits.forEach(function(suit) {
-    values.forEach(function(value) {
-      deck.push(value + suit);
+    suits.forEach(function (suit) {
+        values.forEach(function (value) {
+            deck.push(value + suit);
+        });
     });
-  });
 
-  return deck;
+    return deck;
 };
+
+// let deck = orderedDeck();
+let deck = ['S', 'Y', 'C', 'O', 'P', 'H', 'A', 'N', 'T'];
+console.log(deck);
+
+let shuffledDeck = shuffleDeck(deck);
+console.log(shuffleDeck);
