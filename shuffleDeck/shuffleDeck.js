@@ -32,22 +32,14 @@
  */
 
 var shuffleDeck = function (deck) {
-    let end = deck.length - 1;
-    let start = 1;
-
-    while (start >= 0) {
-        while (start < end) {
-            let temp = deck[end];
-            deck[end] = deck[start];
-            deck[start] = temp;
-
-            start += 2;
-            end -= 2;
-        }
-
-        end = start - 2;
-        start = 0;
+    let n = deck.length;
+    for (let i = n - 1; i >= 1; i--) {
+        let j = Math.floor(Math.random() * n);
+        let temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
     }
+    return deck;
 };
 
 // Ordered deck generator provided for your testing convenience
@@ -66,9 +58,10 @@ var orderedDeck = function () {
     return deck;
 };
 
-// let deck = orderedDeck();
-let deck = ['S', 'Y', 'C', 'O', 'P', 'H', 'A', 'N', 'T'];
+let deck = orderedDeck();
 console.log(deck);
 
 let shuffledDeck = shuffleDeck(deck);
-console.log(shuffleDeck);
+console.log(shuffledDeck);
+
+let end = true;
