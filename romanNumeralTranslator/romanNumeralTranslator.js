@@ -18,16 +18,32 @@
  */
 
 var DIGIT_VALUES = {
-  I: 1,
-  V: 5,
-  X: 10,
-  L: 50,
-  C: 100,
-  D: 500,
-  M: 1000
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000
 };
 
-var translateRomanNumeral = function(romanNumeral) {
-// TODO: Implement me!
-
+var translateRomanNumeral = function (romanNumeral) {
+    if (typeof romanNumeral !== 'string') {
+        return null;
+    }
+    const arrNum = romanNumeral.split('');
+    let total = 0;
+    for (let i = 0; i < arrNum.length; i += 2) {
+        let digit1 = DIGIT_VALUES[arrNum[i]];
+        let digit2 = DIGIT_VALUES[arrNum[i + 1]];
+        if (digit1 < digit2) { //subtraction
+            total += digit2 - digit1;
+        } else if (digit1 > digit2) { // addition
+            total += digit1 + digit2;
+        }
+    }
+    return total;
 };
+
+console.log(translateRomanNumeral("LX"));
+console.log(translateRomanNumeral("IV"));
