@@ -33,17 +33,21 @@ var translateRomanNumeral = function (romanNumeral) {
     }
     const arrNum = romanNumeral.split('');
     let total = 0;
-    for (let i = 0; i < arrNum.length; i += 2) {
+    for (let i = 0; i <= arrNum.length - 1;) {
         let digit1 = DIGIT_VALUES[arrNum[i]];
-        let digit2 = DIGIT_VALUES[arrNum[i + 1]];
-        if (digit1 < digit2) { //subtraction
+        let digit2 = DIGIT_VALUES[arrNum[i + 1]] || 0;
+        let digit3 = DIGIT_VALUES[arrNum[i + 2]] || 0;
+
+        if (digit2 < digit3) {
+            total += (digit3 - digit2) + digit1;
+            i += 3;
+        } else if (digit1 < digit2) {
             total += digit2 - digit1;
-        } else if (digit1 > digit2) { // addition
+            i += 2;
+        } else {
             total += digit1 + digit2;
+            i += 2;
         }
     }
     return total;
 };
-
-console.log(translateRomanNumeral("LX"));
-console.log(translateRomanNumeral("IV"));
