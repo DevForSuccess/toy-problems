@@ -1,0 +1,35 @@
+/*
+ * Given a sorted array, find the index of an element
+ * using a binary search algorithm.
+ *
+ * Example usage:
+ *
+ * var index = binarySearch([1, 2, 3, 4, 5], 4);
+ * console.log(index); // 3
+ * var index = binarySearch([1, 2, 3, 4, 5], 8);
+ * console.log(index); // null
+ */
+
+var binarySearch = function (array, target) {
+    let half = Math.ceil(array.length / 2) - 1;
+    let mid = array[half];
+    let result;
+    if (target > mid) {
+        result = array.indexOf(binarySearch(array.slice(half + 1, array.length), target));
+    } else if (target < mid) {
+        result = array.indexOf(binarySearch(array.slice(0, half), target));
+    } else if (target === mid) {
+        return mid;
+    }
+    if (result >= 0) return result;
+    return null;
+};
+
+var index = binarySearch([1, 2, 3, 4, 5], 4);
+console.log(index); // 3
+var index = binarySearch([1, 2, 3, 4, 5], 1);
+console.log(index); // 0
+var index = binarySearch([1, 2, 3, 4, 5], 8);
+console.log(index); // null
+var index = binarySearch([1, 2, 3, 4, 5], 0);
+console.log(index); // null
