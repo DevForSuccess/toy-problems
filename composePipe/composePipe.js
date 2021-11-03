@@ -34,9 +34,9 @@
 'use strict';
 
 var compose = function () {
-  return (val) => [...arguments].reduce((acc, func) => func.call(null, acc), val);
+  return (val) => [...arguments].reverse().reduce((acc, func) => func(acc), val);
 };
 
 var pipe = function () {
-  return (val) => [...arguments].reduce((acc, func) => func.call(null, acc), val);
+  return (val) => [...arguments].reduce((acc, func) => func(acc), val);
 };
