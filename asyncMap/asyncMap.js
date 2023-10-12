@@ -37,14 +37,16 @@
  *
  */
 
-var asyncMap = function (tasks, callback) {
-    _asyncMap(task => {
+function asyncMap(tasks, cb) {
+    const _asyncMap = (task) => {
         if (task) {
-            task(() => { task(callback); _asyncMap(tasks.shift()) });
+            task(() => {
+                task(cb); _asyncMap(tasks.shift());
+            });
         }
-    });
+    }
     _asyncMap(tasks.shift());
-};
+}
 
 asyncMap([
     function (cb) {

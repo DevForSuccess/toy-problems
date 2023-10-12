@@ -26,28 +26,40 @@ console.log('I: ', '1-context array associated with the subsequent input,\n\    
 console.log('C: ', 'disregard duplicates value in the first input');
 console.log('E', 'make the method work for arrays that contain objects or arrays as elements');
 
-Array.prototype.isSubsetOf = function (arr) {
-  for (let i = 0; i < this.length; i++) {
-    let arg = this[i];
-    if (Array.isArray(arg)) {
-      let result = Array.prototype.isSubsetOf(arg);
-      if (result === false) {
-        return false;
-      }
-    } else if (typeof arg === 'object') {
-      let stringifyStr = JSON.stringify(arg);
-      let stringifyInput = JSON.stringify(arr);
-      let result = stringifyInput.indexOf(stringifyStr);
-      if (result === false) {
-        return false;
-      }
+const flattenArr = function (arr) { // only works for 1 deep nested
+  let flatArr = [];
+  arr.forEach(el => {
+    if (Array.isArray(el)) {
+       let str = el + "";
+       flatArr.push(str);
+    } else if (typeof (el) === 'object') {
+       let str = Object.entries(el) + "";
+       flatArr.push(str);
     } else {
-      if (arr.indexOf(arg) === -1) {
-        return false;
-      }
+      flatArr.push(el);
     }
-  }
-  return true;
+  });
+  return flatArr;
+}
+
+Array.prototype.isSubsetOf = function (arr) {
+  // flatten inputArr
+  let flatArr = flattenArr(arr);
+
+  let result = true;
+  this.forEach(el => {
+    let str = el;
+    if (Array.isArray(el)) {
+      str = el.join(',');
+    }
+    else if (typeof (el) === 'object') {
+      str = Object.entries(el) + "";
+    }
+    if (flatArr.indexOf(str) == -1) {
+      result = false;
+    }
+  });
+  return result;
 };
 
 let contextArr = [];
@@ -81,22 +93,22 @@ inputArr = ['dog', 'cow', 'fox'];
 result = contextArr.isSubsetOf(inputArr); // false
 console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
 
-contextArr =  ['cat', 'cat', 'dog'];
+contextArr = ['cat', 'cat', 'dog'];
 inputArr = ['cat', 'dog'];
 result = contextArr.isSubsetOf(inputArr); // true
 console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
 
-contextArr =  ['cat', 'cat', 'dog'];
+contextArr = ['cat', 'cat', 'dog'];
 inputArr = ['cat'];
-result = contextArr.isSubsetOf(inputArr); // true
+result = contextArr.isSubsetOf(inputArr); // false
 console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
 
-contextArr =  [1, 'cat', 3];
+contextArr = [1, 'cat', 3];
 inputArr = [4, 3, 'cat', 1];
 result = contextArr.isSubsetOf(inputArr); // true
 console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);
 
-contextArr =  [1, 'cat', 3];
+contextArr = [1, 'cat', 3];
 inputArr = [4, 'cat', 1];
 result = contextArr.isSubsetOf(inputArr); // false
 console.log(contextArr, ' ', test, ' ', inputArr, ': ', result);

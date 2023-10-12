@@ -35,25 +35,21 @@
 // for each element in the array.
 
 var bubbleSort = function (array) {
-  let testArray = array.slice();
-  var isAnySwap = false;
-
-  for (let i = 0; i < testArray.length; i++) {
-    for (let j = 0; j < testArray.length - 1; j++) {
-      if (testArray[j] > testArray[j + 1]) {
-        let temp = testArray[j];
-        testArray[j] = testArray[j + 1];
-        testArray[j + 1] = temp;
-        isAnySwap = true;
+  for (let i = 0; i < array.length - 1; i++) {
+    let anySwap = false;
+    for (let j = 0; j < array.length - 1 - i; j++) {
+      if (array[j] > array[j + 1]) {
+        let temp = array[j];
+        array[j] = array[j + 1];
+        array[j + 1] = temp;
+        anySwap = true;
       }
     }
-    if (!isAnySwap) {
-      // done with sorting at first iteration, in this case, the time complexity is O(n)
-      break;
-    }
+    if (!anySwap) break;
   }
-  return testArray;
-};
+  return array;
+}
 
-var test = [2, 1, 3];
+var test = [1, 6, 34, 0, 9];
+
 console.log(bubbleSort(test));
